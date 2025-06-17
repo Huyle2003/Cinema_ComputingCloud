@@ -2,10 +2,8 @@
 FROM openjdk:21 AS build
 WORKDIR /app
 
-# Copy gradlew and wrapper files first
-COPY gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar .
-COPY build.gradle settings.gradle .
-COPY src/ src/
+# Copy all necessary files from the current directory
+COPY . .
 
 # Grant execute permission and run the build for the BACKEND module
 RUN chmod +x ./gradlew && ./gradlew build -x test
