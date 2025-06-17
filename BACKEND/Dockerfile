@@ -6,7 +6,7 @@ WORKDIR /app
 COPY . .
 
 # Grant execute permission and run the build for the BACKEND module
-RUN chmod +x ./gradlew && ./gradlew build -x test
+RUN chmod +x /app/gradlew && /app/gradlew build -x test
 
 # Run stage
 FROM openjdk:21-jdk-slim
