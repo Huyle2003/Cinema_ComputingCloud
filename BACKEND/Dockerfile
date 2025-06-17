@@ -1,9 +1,14 @@
 # Build stage
 FROM openjdk:21 AS build
 WORKDIR /app
-COPY . .
+
+# Copy gradlew and wrapper files first
+COPY gradlew gradlew.bat gradle/wrapper/gradle-wrapper.jar .
+COPY build.gradle settings.gradle .
+COPY src/ src/
+
 # Grant execute permission and run the build for the BACKEND module
-RUN chmod +x ./gradlew && ./gradlew :BACKEND:build -x test
+RUN chmod +x ./gradlew && ./gradlew build -x test
 
 # Run stage
 FROM openjdk:21-jdk-slim
